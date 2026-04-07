@@ -529,3 +529,45 @@ strong {
     grid-template-columns: 1fr;
   }
 }
+
+/* ==========================================================================
+   Section 6: CTA Close
+   ========================================================================== */
+
+.cta-close {
+  padding: var(--space-2xl) 0;
+  text-align: center;
+  border-top: 1px solid var(--color-brass-dim);
+}
+
+.cta-close__headline {
+  max-width: var(--max-width-narrow);
+  margin: 0 auto var(--space-md);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.cta-close__subline {
+  color: var(--color-text-secondary);
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  margin-bottom: var(--space-lg);
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.site-footer {
+  padding: var(--space-lg) 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.site-footer__content {
+  text-align: center;
+}
+
+.site-footer__text {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.05em;
+  margin-top: var(--space-sm);
+}
