@@ -3,19 +3,223 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Codex Lab — Decision Intelligence for Healthcare</title>
-  <meta name="description" content="Evidence-based strategic analysis for mid-market healthcare companies. Two-week sprints. Intelligence that compounds.">
+  <title>Codex Lab — Light Mode: Ideal Path (Dark Hero + Light Body)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <noscript><style>.fade-in { opacity: 1; transform: none; }</style></noscript>
+  <style>
+    /* ==========================================================
+       IDEAL PATH — Dark hero, light body
+       Forces light-mode overrides regardless of system setting
+       ========================================================== */
+
+    :root {
+      /* Light body tokens */
+      --lm-bg: #F5F1EB;
+      --lm-bg-card: #FFFFFF;
+      --lm-bg-card-hover: #FAF8F5;
+      --lm-bg-section: #EDE9E3;
+      --lm-text-primary: #3D3A36;
+      --lm-text-headline: #1A1815;
+      --lm-text-secondary: #6B6560;
+      --lm-brass: #7A5F42;
+      --lm-brass-dim: rgba(122, 95, 66, 0.15);
+      --lm-border: rgba(122, 95, 66, 0.12);
+    }
+
+    /* Hero stays dark — identical to dark mode */
+    .hero {
+      background-color: #141210;
+      color: #E8E0D5;
+    }
+    .hero .monogram { color: #D4AA7D; }
+    .hero .brass-rule { background-color: #D4AA7D; }
+    .hero .hero__brand-name { color: #A8A29E; }
+    .hero .hero__headline { color: #F7E6D2; }
+    .hero .hero__headline-sub { color: #F7E6D2; }
+    .hero .hero__subline { color: #A8A29E; }
+    .hero .cta-button {
+      color: #141210;
+      background-color: #D4AA7D;
+      border-color: #D4AA7D;
+    }
+    .hero .cta-button:hover {
+      background-color: transparent;
+      color: #D4AA7D;
+      border-color: #B5BEDD;
+      box-shadow: 0 0 20px rgba(181, 190, 221, 0.1);
+    }
+    .hero::before {
+      background:
+        linear-gradient(135deg, transparent 30%, rgba(212, 170, 125, 0.1) 48%, rgba(212, 170, 125, 0.12) 50%, rgba(212, 170, 125, 0.1) 52%, transparent 70%),
+        linear-gradient(225deg, transparent 30%, rgba(212, 170, 125, 0.1) 48%, rgba(212, 170, 125, 0.12) 50%, rgba(212, 170, 125, 0.1) 52%, transparent 70%),
+        repeating-linear-gradient(45deg, transparent, transparent 80px, rgba(212, 170, 125, 0.03) 80px, rgba(212, 170, 125, 0.03) 81px),
+        repeating-linear-gradient(-45deg, transparent, transparent 80px, rgba(212, 170, 125, 0.03) 80px, rgba(212, 170, 125, 0.03) 81px);
+    }
+    .hero::after {
+      background: radial-gradient(ellipse at center, transparent 40%, #141210 100%);
+    }
+
+    /* All section headings — bold */
+    .section-heading {
+      font-weight: 700;
+    }
+
+    /* Credibility bar — warm mid-tone transition */
+    .credibility-bar {
+      background-color: #DDD8D1;
+    }
+    .credibility-bar__heading {
+      color: #6B6560;
+      font-size: clamp(1rem, 1.8vw, 1.25rem);
+      font-weight: 600;
+    }
+    .credibility-bar__name { color: var(--lm-text-headline); }
+    .credibility-bar__detail { color: var(--lm-text-secondary); }
+
+    /* Alternating section backgrounds for clear segmentation */
+    .same-questions {
+      background-color: var(--lm-bg);
+      color: var(--lm-text-primary);
+      border-top: none;
+    }
+
+    .built-different {
+      background-color: #E8E3DC;
+      color: var(--lm-text-primary);
+    }
+
+    /* How It Works — dark section for dramatic break */
+    .how-it-works {
+      background-color: #1A1815;
+      color: #E8E0D5;
+      border-top: none;
+    }
+    .how-it-works .section-heading { color: #D4AA7D; }
+
+    .pricing {
+      background-color: var(--lm-bg);
+      color: var(--lm-text-primary);
+      border-top: none;
+    }
+
+    .cta-close {
+      background-color: #1A1815;
+      color: #E8E0D5;
+      border-top: none;
+    }
+
+    /* Section headings on light bg */
+    .same-questions .section-heading,
+    .built-different .section-heading,
+    .pricing .section-heading {
+      color: var(--lm-brass);
+    }
+
+    /* Section headings on light — darker for contrast */
+    .same-questions .section-heading,
+    .built-different .section-heading,
+    .pricing .section-heading {
+      color: var(--lm-text-headline);
+    }
+
+    /* Same Questions — lead and close same color, emphasis pops */
+    .same-questions__lead { color: var(--lm-text-secondary); }
+    .same-questions__emphasis { color: var(--lm-text-headline); }
+    .same-questions__close { color: var(--lm-text-secondary); }
+
+    /* Cards — warm tinted, not pure white */
+    .card {
+      background-color: #EDE9E3;
+      border-color: var(--lm-border);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+    }
+    .card:hover {
+      background-color: #E8E3DC;
+      border-color: var(--lm-brass);
+      box-shadow: 0 4px 20px rgba(122, 95, 66, 0.12);
+    }
+    .card h3 { color: var(--lm-brass); }
+    .card p { color: var(--lm-text-secondary); }
+
+    /* Process — on dark bg */
+    .process__number { color: #D4AA7D; }
+    .process__title { color: #F7E6D2; }
+    .process__description { color: #A8A29E; }
+    .process__step { border-bottom-color: rgba(212, 170, 125, 0.12); }
+
+    /* Tiers — white cards on light bg */
+    .tier {
+      background-color: var(--lm-bg-card);
+      border-color: var(--lm-border);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    }
+    .tier__name {
+      color: var(--lm-brass);
+      font-weight: 600;
+      font-size: 1.75rem;
+    }
+    .tier__price { color: var(--lm-text-secondary); border-bottom-color: var(--lm-border); }
+    .tier__price strong { color: var(--lm-text-headline); }
+    .tier__description { color: var(--lm-text-primary); }
+    .tier__best-for { color: var(--lm-text-secondary); }
+    .tier__label {
+      color: var(--lm-brass);
+      font-weight: 700;
+      font-size: 0.8125rem;
+    }
+    .tier__examples { border-top-color: rgba(0, 0, 0, 0.06); }
+    .tier__examples li { color: var(--lm-text-secondary); }
+    .tier__examples li + li { border-top-color: rgba(0, 0, 0, 0.04); }
+
+    /* CTA Close — dark bookend matching hero */
+    .cta-close__headline { color: #F7E6D2; }
+    .cta-close__subline { color: #A8A29E; }
+    .cta-close .cta-button {
+      color: #1A1815;
+      background-color: #D4AA7D;
+      border-color: #D4AA7D;
+    }
+    .cta-close .cta-button:hover {
+      background-color: transparent;
+      color: #D4AA7D;
+      border-color: #B5BEDD;
+      box-shadow: 0 0 20px rgba(181, 190, 221, 0.1);
+    }
+
+    /* Footer — dark to match CTA close */
+    .site-footer {
+      background-color: #141210;
+      border-top-color: rgba(212, 170, 125, 0.1);
+    }
+    .site-footer .monogram { color: #D4AA7D; }
+    .site-footer .brass-rule { background-color: #D4AA7D; }
+    .site-footer__brand { color: #A8A29E; }
+    .site-footer__text { color: #A8A29E; }
+
+    /* Override the prefers-color-scheme media query — this preview forces the style */
+    @media (prefers-color-scheme: light) {
+      :root {
+        --color-bg: #F5F1EB;
+        --color-bg-card: #FFFFFF;
+        --color-text-primary: #3D3A36;
+        --color-text-headline: #1A1815;
+        --color-text-secondary: #6B6560;
+      }
+    }
+    @media (prefers-color-scheme: dark) {
+      .same-questions, .built-different, .how-it-works, .pricing, .cta-close {
+        background-color: var(--lm-bg);
+        color: var(--lm-text-primary);
+      }
+    }
+  </style>
 </head>
 <body>
 
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <!-- Section 1: Hero -->
   <header class="hero" role="banner">
     <div class="hero__container">
       <div class="hero__monogram">
@@ -32,7 +236,6 @@
     </div>
   </header>
 
-  <!-- Credibility Bar -->
   <section class="credibility-bar" aria-label="Experience credentials">
     <div class="container">
       <p class="credibility-bar__heading">Built on Experience From</p>
@@ -59,55 +262,41 @@
 
   <main id="main-content">
 
-    <!-- Section 2: Same Questions, Different Budgets -->
     <section class="same-questions fade-in" aria-labelledby="same-questions-heading">
       <div class="container">
         <h2 id="same-questions-heading" class="section-heading">Same Questions, Different Budgets</h2>
         <div class="same-questions__content">
-          <p class="same-questions__lead">
-            Fortune 100 healthcare companies have entire strategy departments — analysts, consultants, intelligence teams — answering competitive questions, evaluating market entry, stress-testing decisions.
-          </p>
-          <p class="same-questions__emphasis">
-            The questions don't get smaller just because the budget does.
-          </p>
-          <p class="same-questions__close">
-            Mid-market companies face the same complexity with a fraction of the resources. Codex Lab closes that gap — the same analytical rigor, scoped to mid-market economics, with intelligence that compounds over time.
-          </p>
+          <p class="same-questions__lead">Fortune 100 healthcare companies have entire strategy departments — analysts, consultants, intelligence teams — answering competitive questions, evaluating market entry, stress-testing decisions.</p>
+          <p class="same-questions__emphasis">The questions don't get smaller just because the budget does.</p>
+          <p class="same-questions__close">Mid-market companies face the same complexity with a fraction of the resources. Codex Lab closes that gap — the same analytical rigor, scoped to mid-market economics, with intelligence that compounds over time.</p>
         </div>
       </div>
     </section>
 
-    <!-- Section 3: Built Different by Design -->
     <section class="built-different fade-in" aria-labelledby="built-different-heading">
       <div class="container">
         <h2 id="built-different-heading" class="section-heading">Built Different by Design</h2>
         <div class="built-different__grid">
-
           <article class="card fade-in">
             <h3 class="card__title">Intelligence That Compounds</h3>
             <p class="card__body">Every engagement builds on the last. Institutional memory carries forward. Sprint 3 is faster, deeper, and more contextualized than Sprint 1.</p>
           </article>
-
           <article class="card fade-in">
             <h3 class="card__title">Evidence, Not Consensus</h3>
             <p class="card__body">Sources weighted, conflicts surfaced, uncertainty named. When the evidence disagrees, you see the disagreement — not an averaged-out answer.</p>
           </article>
-
           <article class="card fade-in">
             <h3 class="card__title">Built to Challenge</h3>
             <p class="card__body">Every recommendation survives structured dissent before it reaches you. If the logic has a hole, we find it first.</p>
           </article>
-
         </div>
       </div>
     </section>
 
-    <!-- Section 4: How It Works -->
     <section class="how-it-works fade-in" aria-labelledby="how-it-works-heading">
       <div class="container">
         <h2 id="how-it-works-heading" class="section-heading">How It Works</h2>
         <ol class="process">
-
           <li class="process__step fade-in">
             <span class="process__number" aria-hidden="true">01</span>
             <div class="process__content">
@@ -115,7 +304,6 @@
               <p class="process__description">We define the real question, constraints, and what "decision-ready" looks like for your team. Free, no obligation.</p>
             </div>
           </li>
-
           <li class="process__step fade-in">
             <span class="process__number" aria-hidden="true">02</span>
             <div class="process__content">
@@ -123,7 +311,6 @@
               <p class="process__description">The Brief or The Analysis, depending on complexity. Fixed price, fixed timeline, no surprises.</p>
             </div>
           </li>
-
           <li class="process__step fade-in">
             <span class="process__number" aria-hidden="true">03</span>
             <div class="process__content">
@@ -131,7 +318,6 @@
               <p class="process__description">Evidence-weighted memo or full strategic roadmap. Built to present to leadership, not sit in a drawer.</p>
             </div>
           </li>
-
           <li class="process__step fade-in">
             <span class="process__number" aria-hidden="true">04</span>
             <div class="process__content">
@@ -139,21 +325,17 @@
               <p class="process__description">The Advisory: quarterly reviews, compounding intelligence, priority access. Most clients start with a sprint and graduate here.</p>
             </div>
           </li>
-
         </ol>
       </div>
     </section>
 
-    <!-- Section 5: Pricing -->
     <section class="pricing fade-in" aria-labelledby="pricing-heading">
       <div class="container">
         <h2 id="pricing-heading" class="section-heading">Engagement Tiers</h2>
-
         <div class="pricing__grid">
-
           <article class="tier fade-in">
             <h3 class="tier__name">The Brief</h3>
-            <p class="tier__price">Starting from <strong>$15,000</strong></p>
+            <p class="tier__price">Starting at <strong>$15,000</strong></p>
             <p class="tier__description">One bounded question, decision-ready memo with evidence-weighted confidence scoring and clear recommendation. ~2 week timeline.</p>
             <p class="tier__best-for"><span class="tier__label">Best for:</span> Go/no-go decisions, competitive exposure assessments, market entry gut-checks</p>
             <ul class="tier__examples" aria-label="Example questions for The Brief">
@@ -162,10 +344,9 @@
               <li>"What's the real margin risk if [payer] changes reimbursement terms?"</li>
             </ul>
           </article>
-
           <article class="tier fade-in">
             <h3 class="tier__name">The Analysis</h3>
-            <p class="tier__price">Starting from <strong>$25,000</strong></p>
+            <p class="tier__price">Starting at <strong>$25,000</strong></p>
             <p class="tier__description">Complex question, full landscape analysis, strategy + implementation roadmap. Everything in The Brief plus: competitive landscape mapping, scenario modeling, implementation sequencing, and strategic debrief.</p>
             <p class="tier__best-for"><span class="tier__label">Best for:</span> Decisions that change how you operate — market entry, business model shifts, competitive repositioning</p>
             <ul class="tier__examples" aria-label="Example questions for The Analysis">
@@ -174,10 +355,9 @@
               <li>"What's the build-vs-buy-vs-partner calculus for launching [new service line]?"</li>
             </ul>
           </article>
-
           <article class="tier fade-in">
             <h3 class="tier__name">The Advisory</h3>
-            <p class="tier__price">Starting from <strong>$5,000</strong>/month</p>
+            <p class="tier__price">Starting at <strong>$5,000</strong>/month</p>
             <p class="tier__description">Ongoing intelligence relationship with compounding decision memory. Quarterly intelligence reviews, persistent decision memory, priority access, and quick-turn intelligence requests.</p>
             <p class="tier__best-for"><span class="tier__label">Best for:</span> Teams facing recurring strategic questions who want each answer to build on the last. Full sprint engagements scoped separately — advisory clients get priority scheduling.</p>
             <ul class="tier__examples" aria-label="Example questions for The Advisory">
@@ -185,15 +365,10 @@
               <li>"Track regulatory signals in [therapeutic area] and brief us monthly on what's changed."</li>
             </ul>
           </article>
-
         </div>
-
-        <!-- Tagline removed — each tier is self-explanatory -->
-
       </div>
     </section>
 
-    <!-- Section 6: CTA Close -->
     <section class="cta-close fade-in" aria-labelledby="cta-close-heading">
       <div class="container">
         <h2 id="cta-close-heading" class="cta-close__headline">The best time to answer a hard question is before your competitor does.</h2>

@@ -3,17 +3,22 @@
    ========================================================================== */
 
 :root {
-  /* Colors — derived from logo reference and brand samples */
-  --color-bg: #0F0F0F;
-  --color-bg-card: #1A1A1A;
-  --color-bg-card-hover: #222222;
-  --color-brass: #C5A55A;
-  --color-brass-dim: rgba(197, 165, 90, 0.3);
-  --color-text-primary: #E8E3DD;
-  --color-text-headline: #F0EDE8;
-  --color-text-secondary: #9A9590;
-  --color-text-emphasis: #D4CFC9;
-  --color-brass-bright: #D4B666;
+  /* Colors — warm palette: Sandy Clay + Antique White + Shadow Grey */
+  --color-bg: #141210;
+  --color-bg-alt: #1C1A17;
+  --color-bg-card: #272727;
+  --color-bg-card-hover: #2F2D2A;
+  --color-bg-light: #F0ECE6;
+  --color-brass: #D4AA7D;
+  --color-brass-dim: rgba(212, 170, 125, 0.25);
+  --color-brass-glow: rgba(212, 170, 125, 0.08);
+  --color-text-primary: #E8E0D5;
+  --color-text-headline: #F7E6D2;
+  --color-text-secondary: #A8A29E;
+  --color-text-emphasis: #F7E6D2;
+  --color-brass-bright: #D4AA7D;
+  --color-periwinkle: #B5BEDD;
+  --color-garnet: #6B0B0C;
 
   /* Typography */
   --font-headline: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
@@ -114,7 +119,7 @@ strong {
   text-transform: uppercase;
   font-size: clamp(1rem, 1.8vw, 1.25rem);
   font-family: var(--font-body);
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.2em;
   color: var(--color-brass-bright);
 }
@@ -127,7 +132,7 @@ strong {
   width: 60px;
   height: 2px;
   background-color: var(--color-brass);
-  margin: var(--space-sm) auto;
+  margin: 0.375rem auto;
 }
 
 .brass-rule--small {
@@ -157,6 +162,8 @@ strong {
 .cta-button:hover {
   background-color: transparent;
   color: var(--color-brass);
+  border-color: var(--color-periwinkle);
+  box-shadow: 0 0 20px rgba(181, 190, 221, 0.1);
 }
 
 .cta-button:focus-visible {
@@ -176,6 +183,8 @@ strong {
   letter-spacing: 0.05em;
   display: block;
   text-align: center;
+  line-height: 1;
+  margin-bottom: 0;
 }
 
 .monogram--small {
@@ -221,11 +230,53 @@ strong {
   justify-content: center;
   text-align: center;
   padding: var(--space-xl) var(--space-md);
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-bg);
+}
+
+/* Subtle geometric background pattern */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, transparent 40%, var(--color-brass-glow) 50%, transparent 60%),
+    linear-gradient(225deg, transparent 40%, var(--color-brass-glow) 50%, transparent 60%),
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 80px,
+      rgba(212, 170, 125, 0.03) 80px,
+      rgba(212, 170, 125, 0.03) 81px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 80px,
+      rgba(212, 170, 125, 0.03) 80px,
+      rgba(212, 170, 125, 0.03) 81px
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Vignette overlay for depth */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 40%, var(--color-bg) 100%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 .hero__container {
-  max-width: var(--max-width-narrow);
+  position: relative;
+  z-index: 1;
 }
+
+/* removed — now positioned in hero block above */
 
 .hero__monogram {
   margin-bottom: var(--space-lg);
@@ -240,12 +291,13 @@ strong {
 }
 
 .hero__brand-name {
-  font-family: var(--font-headline);
-  font-size: clamp(1.125rem, 2vw, 1.5rem);
-  color: var(--color-brass-bright);
-  letter-spacing: 0.15em;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.3em;
   text-transform: uppercase;
-  margin-top: var(--space-xs);
+  margin-top: 0.25rem;
+  font-weight: 400;
 }
 
 .hero__headline-sub {
@@ -257,9 +309,9 @@ strong {
 }
 
 .hero__subline {
-  font-size: clamp(1.0625rem, 1.8vw, 1.25rem);
+  font-size: clamp(1.1875rem, 2.2vw, 1.5rem);
   color: var(--color-text-secondary);
-  margin-bottom: var(--space-sm);
+  margin-bottom: var(--space-lg);
   font-style: italic;
   font-family: var(--font-headline);
 }
@@ -285,7 +337,6 @@ strong {
 .hero__container > *:nth-child(3) { animation-delay: 0.5s; }
 .hero__container > *:nth-child(4) { animation-delay: 0.65s; }
 .hero__container > *:nth-child(5) { animation-delay: 0.8s; }
-.hero__container > *:nth-child(6) { animation-delay: 0.95s; }
 
 @keyframes hero-fade-in {
   to {
@@ -303,12 +354,69 @@ strong {
 }
 
 /* ==========================================================================
+   Credibility Bar — "Built on Experience From"
+   ========================================================================== */
+
+.credibility-bar {
+  background-color: #302618;
+  padding: var(--space-lg) 0;
+}
+
+.credibility-bar__heading {
+  text-align: center;
+  text-transform: uppercase;
+  font-family: var(--font-body);
+  font-size: clamp(0.875rem, 1.5vw, 1.125rem);
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  color: rgba(212, 170, 125, 0.75);
+  margin-bottom: var(--space-md);
+}
+
+.credibility-bar__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-md);
+  text-align: center;
+}
+
+.credibility-bar__name {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  font-weight: 600;
+  color: #D4AA7D;
+  margin-bottom: 0.25rem;
+}
+
+.credibility-bar__detail {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #A8A29E;
+}
+
+@media (max-width: 768px) {
+  .credibility-bar__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm) var(--space-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .credibility-bar__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+}
+
+/* ==========================================================================
    Section 2: Same Questions, Different Budgets
    ========================================================================== */
 
 .same-questions {
   padding: var(--space-2xl) 0 var(--space-lg);
-  border-top: 1px solid var(--color-brass-dim);
+  border-top: none;
+  background-color: #251F17;
 }
 
 .same-questions__content {
@@ -344,6 +452,7 @@ strong {
 
 .built-different {
   padding: var(--space-lg) 0 var(--space-2xl);
+  background-color: #1C1B19;
 }
 
 .built-different__grid {
@@ -353,8 +462,8 @@ strong {
 }
 
 .card {
-  background-color: var(--color-bg-card);
-  border: 1px solid var(--color-brass-dim);
+  background-color: #28241E;
+  border: 1px solid rgba(212, 170, 125, 0.12);
   padding: var(--space-lg) var(--space-md);
   text-align: center;
   transition: border-color 0.3s ease, background-color 0.3s ease;
@@ -362,10 +471,12 @@ strong {
 
 .card:hover {
   border-color: var(--color-brass);
-  background-color: var(--color-bg-card-hover);
+  background-color: #302B24;
+  box-shadow: 0 4px 24px rgba(212, 170, 125, 0.08);
 }
 
 .card__title {
+  font-weight: 600;
   margin-bottom: var(--space-sm);
 }
 
@@ -387,7 +498,8 @@ strong {
 
 .how-it-works {
   padding: var(--space-2xl) 0;
-  border-top: 1px solid var(--color-brass-dim);
+  border-top: none;
+  background-color: #141210;
 }
 
 .process {
@@ -442,27 +554,32 @@ strong {
 
 .pricing {
   padding: var(--space-2xl) 0;
-  border-top: 1px solid var(--color-brass-dim);
+  border-top: none;
+  background-color: #1C1B19;
 }
 
 .pricing__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-md);
+  grid-template-rows: repeat(5, auto);
+  gap: 0 var(--space-md);
   margin-bottom: var(--space-lg);
 }
 
 .tier {
-  background-color: var(--color-bg-card);
-  border: 1px solid var(--color-brass-dim);
+  background-color: #141210;
+  border: 1px solid rgba(212, 170, 125, 0.15);
   padding: var(--space-lg) var(--space-md);
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-row: span 5;
+  grid-template-rows: subgrid;
+  row-gap: var(--space-sm);
 }
 
 .tier__name {
   font-family: var(--font-headline);
-  font-size: 1.5rem;
+  font-size: 1.75rem;
+  font-weight: 700;
   color: var(--color-brass);
   margin-bottom: var(--space-sm);
 }
@@ -483,23 +600,22 @@ strong {
 
 .tier__description {
   font-size: 0.9375rem;
-  color: var(--color-text-primary);
+  color: var(--color-text-secondary);
   margin-bottom: var(--space-sm);
 }
 
 .tier__best-for {
   font-size: 0.875rem;
-  color: var(--color-text-secondary);
-  margin-top: auto;
-  padding-top: var(--space-sm);
-  margin-bottom: var(--space-sm);
+  color: #E8E0D5;
+  align-self: start;
+  margin-bottom: 0;
 }
 
 .tier__label {
   color: var(--color-brass);
-  font-weight: 500;
+  font-weight: 700;
   text-transform: uppercase;
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   letter-spacing: 0.1em;
 }
 
@@ -518,8 +634,9 @@ strong {
 
 .tier__examples {
   list-style: none;
-  padding-top: var(--space-md);
+  padding-top: 0.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
+  align-self: start;
 }
 
 .tier__examples li {
@@ -547,6 +664,14 @@ strong {
 @media (max-width: 768px) {
   .pricing__grid {
     grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  .tier {
+    grid-row: auto;
+    grid-template-rows: none;
+    display: flex;
+    flex-direction: column;
   }
 }
 
@@ -557,7 +682,8 @@ strong {
 .cta-close {
   padding: var(--space-2xl) 0;
   text-align: center;
-  border-top: 1px solid var(--color-brass-dim);
+  border-top: none;
+  background-color: #141210;
 }
 
 .cta-close__headline {
@@ -579,11 +705,21 @@ strong {
 
 .site-footer {
   padding: var(--space-lg) 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(212, 170, 125, 0.1);
+  background-color: #0E0C0A;
 }
 
 .site-footer__content {
   text-align: center;
+}
+
+.site-footer__brand {
+  font-family: var(--font-body);
+  font-size: 0.625rem;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-top: 0.25rem;
 }
 
 .site-footer__text {
@@ -615,4 +751,214 @@ strong {
 
 .skip-link:focus {
   top: var(--space-sm);
+}
+
+/* ==========================================================================
+   Light Mode — prefers-color-scheme: light
+   ========================================================================== */
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-bg: #F7E6D2;
+    --color-bg-alt: #EDE0CF;
+    --color-bg-card: #FAF6F0;
+    --color-bg-card-hover: #F5F0E8;
+    --color-bg-light: #D4AA7D;
+    --color-brass: #D4AA7D;
+    --color-brass-dim: rgba(212, 170, 125, 0.25);
+    --color-brass-glow: rgba(212, 170, 125, 0.08);
+    --color-text-primary: #3D3A36;
+    --color-text-headline: #1A1815;
+    --color-text-secondary: #6B6560;
+    --color-text-emphasis: #F7E6D2;
+    --color-brass-bright: #D4AA7D;
+    --color-periwinkle: #B5BEDD;
+    --color-garnet: #6B0B0C;
+  }
+
+  /* Hero — Deep garnet with antique white text */
+  .hero {
+    background-color: #4A0808;
+  }
+
+  .hero::before {
+    background:
+      linear-gradient(135deg, transparent 30%, rgba(212, 170, 125, 0.08) 48%, rgba(212, 170, 125, 0.1) 50%, rgba(212, 170, 125, 0.08) 52%, transparent 70%),
+      linear-gradient(225deg, transparent 30%, rgba(212, 170, 125, 0.08) 48%, rgba(212, 170, 125, 0.1) 50%, rgba(212, 170, 125, 0.08) 52%, transparent 70%),
+      repeating-linear-gradient(45deg, transparent, transparent 80px, rgba(212, 170, 125, 0.04) 80px, rgba(212, 170, 125, 0.04) 81px),
+      repeating-linear-gradient(-45deg, transparent, transparent 80px, rgba(212, 170, 125, 0.04) 80px, rgba(212, 170, 125, 0.04) 81px);
+  }
+
+  .hero::after {
+    background: radial-gradient(ellipse at center, transparent 40%, #4A0808 100%);
+  }
+
+  .hero .monogram { color: #D4AA7D; }
+  .hero .brass-rule { background-color: #D4AA7D; }
+  .hero .hero__brand-name { color: rgba(247, 230, 210, 0.6); }
+  .hero .hero__headline { color: #F7E6D2; }
+  .hero .hero__headline-sub { color: #F7E6D2; }
+  .hero .hero__subline { color: rgba(247, 230, 210, 0.65); }
+
+  .hero .cta-button {
+    color: #4A0808;
+    background-color: #D4AA7D;
+    border-color: #D4AA7D;
+  }
+  .hero .cta-button:hover {
+    background-color: transparent;
+    color: #D4AA7D;
+    border-color: #F7E6D2;
+    box-shadow: 0 0 24px rgba(212, 170, 125, 0.15);
+  }
+
+  /* Credibility bar — sandy clay base */
+  .credibility-bar {
+    background-color: #D4AA7D;
+  }
+  .credibility-bar__heading {
+    color: rgba(74, 8, 8, 0.8);
+    font-size: clamp(1rem, 1.8vw, 1.25rem);
+    font-weight: 600;
+  }
+  .credibility-bar__name { color: #3A0606; }
+  .credibility-bar__detail { color: rgba(58, 6, 6, 0.85); }
+
+  /* All section headings — bold */
+  .section-heading {
+    font-weight: 700;
+  }
+
+  /* Same Questions — antique white bg */
+  .same-questions {
+    background-color: #F7E6D2;
+    color: #3D3A36;
+    border-top: none;
+  }
+
+  /* Built Different — slightly darker cream */
+  .built-different {
+    background-color: #EDE0CF;
+    color: #3D3A36;
+  }
+
+  /* Section headings — garnet accent on light sections */
+  .same-questions .section-heading,
+  .built-different .section-heading,
+  .pricing .section-heading {
+    color: #6B0B0C;
+  }
+
+  /* Same Questions body text */
+  .same-questions__lead,
+  .same-questions__close {
+    color: #6B6560;
+    font-family: var(--font-body);
+    font-style: normal;
+  }
+  .same-questions__emphasis {
+    color: #1A1815;
+    font-family: var(--font-headline);
+  }
+
+  /* Cards — warm off-white, garnet accents */
+  .card {
+    background-color: #FAF6F0;
+    border: 1px solid rgba(107, 11, 12, 0.08);
+    box-shadow: 0 2px 8px rgba(107, 11, 12, 0.05);
+  }
+  .card:hover {
+    background-color: #F5F0E8;
+    border-color: #6B0B0C;
+    box-shadow: 0 4px 20px rgba(107, 11, 12, 0.1);
+  }
+  .card h3 {
+    color: #6B0B0C;
+    font-weight: 600;
+  }
+  .card p { color: #6B6560; }
+
+  /* How It Works — garnet bg for dramatic section break */
+  .how-it-works {
+    background-color: #4A0808;
+    color: #F7E6D2;
+    border-top: none;
+  }
+  .how-it-works .section-heading { color: #D4AA7D; }
+
+  .process__number { color: #D4AA7D; }
+  .process__title { color: #F7E6D2; }
+  .process__description { color: rgba(247, 230, 210, 0.7); }
+  .process__step { border-bottom-color: rgba(212, 170, 125, 0.15); }
+
+  /* Pricing — antique white bg */
+  .pricing {
+    background-color: #F7E6D2;
+    color: #3D3A36;
+    border-top: none;
+  }
+
+  /* Tiers — deep garnet cards */
+  .tier {
+    background-color: #4A0808;
+    border: 1px solid rgba(212, 170, 125, 0.2);
+    color: #F7E6D2;
+  }
+  .tier__name {
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 1.75rem;
+  }
+  .tier__price { color: rgba(255, 255, 255, 0.6); border-bottom-color: rgba(212, 170, 125, 0.2); }
+  .tier__price strong { color: #FFFFFF; }
+  .tier__description { color: rgba(247, 230, 210, 0.6); }
+  .tier__best-for { color: #F7E6D2; }
+  .tier__label {
+    color: #D4AA7D;
+    font-weight: 700;
+    font-size: 0.8125rem;
+  }
+  .tier__examples {
+    border-top-color: rgba(212, 170, 125, 0.15);
+  }
+  .tier__examples li {
+    color: rgba(247, 230, 210, 0.75);
+    font-size: 0.875rem;
+  }
+  .tier__examples li + li { border-top-color: rgba(212, 170, 125, 0.08); }
+
+  /* CTA Close — garnet bg for bookend effect */
+  .cta-close {
+    background-color: #4A0808;
+    border-top: none;
+    border-top-color: rgba(212, 170, 125, 0.2);
+  }
+  .cta-close__headline { color: #F7E6D2; }
+  .cta-close__subline { color: rgba(247, 230, 210, 0.65); }
+  .cta-close .cta-button {
+    color: #4A0808;
+    background-color: #D4AA7D;
+    border-color: #D4AA7D;
+  }
+  .cta-close .cta-button:hover {
+    background-color: transparent;
+    color: #D4AA7D;
+    border-color: #F7E6D2;
+  }
+
+  /* Footer — deepest garnet */
+  .site-footer {
+    background-color: #3A0606;
+    border-top-color: rgba(212, 170, 125, 0.15);
+  }
+  .site-footer .monogram { color: #D4AA7D; }
+  .site-footer .brass-rule { background-color: #D4AA7D; }
+  .site-footer__brand { color: rgba(247, 230, 210, 0.6); }
+  .site-footer__text { color: rgba(247, 230, 210, 0.65); }
+
+  /* Skip link */
+  .skip-link {
+    background-color: #D4AA7D;
+    color: #4A0808;
+  }
 }
