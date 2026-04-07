@@ -1,0 +1,24 @@
+# Security: never commit secrets
+.env
+.env.*
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+credentials.json
+secrets.json
+*.secret
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Dependencies (shouldn't exist, but just in case)
+node_modules/
