@@ -318,3 +318,46 @@ strong {
   font-size: clamp(1.0625rem, 1.5vw, 1.1875rem);
   color: var(--color-text-secondary);
 }
+
+/* ==========================================================================
+   Section 3: Built Different by Design
+   ========================================================================== */
+
+.built-different {
+  padding: var(--space-2xl) 0;
+}
+
+.built-different__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+
+.card {
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-brass-dim);
+  padding: var(--space-lg) var(--space-md);
+  text-align: center;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.card:hover {
+  border-color: var(--color-brass);
+  background-color: var(--color-bg-card-hover);
+}
+
+.card__title {
+  margin-bottom: var(--space-sm);
+}
+
+.card__body {
+  color: var(--color-text-secondary);
+  font-size: 0.9375rem;
+}
+
+@media (max-width: 768px) {
+  .built-different__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+}
